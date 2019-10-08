@@ -5,8 +5,8 @@ export type TodoState = {
 };
 
 export type Actions = {
-  type: 'ADD_TODO' | 'TOGGLE_COMPLETED';
-  payload: Todo;
+  type: 'ADD_TODO' | 'TOGGLE_COMPLETED' | 'CLEAR_COMPLETED';
+  payload?: Todo;
 };
 
 export const initialState: TodoState = {
@@ -24,16 +24,26 @@ export const reducer = (state: TodoState, action: Actions) => {
 
   switch (type) {
     case 'ADD_TODO':
+      if (!payload) return state;
       return {
         ...state,
         todos: [...state.todos, payload],
       };
+
     case 'TOGGLE_COMPLETED':
+      if (!payload) return state;
       payload.completed = !payload.completed;
       const todos = state.todos.map((todo) => (todo.id === payload.id ? payload : todo));
       return {
         ...state,
         todos,
+      };
+
+    case 'CLEAR_COMPLETED':
+      const uncompleted = state.todos.filter((todo) => !todo.completed);
+      return {
+        ...state,
+        todos: uncompleted,
       };
 
     default:
