@@ -4,8 +4,11 @@ import { Card, Typography, CardContent, makeStyles, Checkbox } from '@material-u
 
 import { Todo } from '../../../../models/Todo';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   card: {
+    margin: 12,
+  },
+  cardContent: {
     display: 'flex',
     alignItems: 'center',
   },
@@ -22,11 +25,10 @@ const TodoCard = (props: TodoCardProps) => {
   const classes = useStyles({});
 
   const { todo } = props;
-  console.log(todo.item);
 
   return (
-    <Card>
-      <CardContent className={classes.card}>
+    <Card className={classes.card}>
+      <CardContent className={classes.cardContent}>
         <Typography variant='h5' gutterBottom>
           {todo.item}
         </Typography>

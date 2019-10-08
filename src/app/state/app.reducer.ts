@@ -6,6 +6,7 @@ export type TodoState = {
 
 export type Actions = {
   type: 'ADD_TODO';
+  payload: Todo;
 };
 
 export const initialState: TodoState = {
@@ -19,7 +20,14 @@ export const initialState: TodoState = {
 };
 
 export const reducer = (state: TodoState, action: Actions) => {
-  switch (action.type) {
+  const { payload, type } = action;
+
+  switch (type) {
+    case 'ADD_TODO':
+      return {
+        ...state,
+        todos: [...state.todos, payload],
+      };
     default:
       return state;
   }
