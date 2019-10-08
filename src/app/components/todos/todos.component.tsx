@@ -8,11 +8,14 @@ import { Todo } from '../../models/Todo';
 const Todos = () => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
+  const addTodo = (todo: Todo) => dispatch({ type: 'ADD_TODO', payload: todo });
+  const toggleCompleted = (todo: Todo) => dispatch({ type: 'TOGGLE_COMPLETED', payload: todo });
+
   return (
     <>
-      <TodoAdd onSubmit={(todo: Todo) => dispatch({ type: 'ADD_TODO', payload: todo })} />
+      <TodoAdd onSubmit={addTodo} />
       {state.todos.map((todo) => (
-        <TodoCard key={todo.id} todo={todo}></TodoCard>
+        <TodoCard key={todo.id} todo={todo} toggleCompleted={toggleCompleted}></TodoCard>
       ))}
     </>
   );

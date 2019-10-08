@@ -19,12 +19,12 @@ const useStyles = makeStyles(() => ({
 
 type TodoCardProps = {
   todo: Todo;
+  toggleCompleted: (todo: Todo) => void;
 };
 
 const TodoCard = (props: TodoCardProps) => {
+  const { todo, toggleCompleted } = props;
   const classes = useStyles({});
-
-  const { todo } = props;
 
   return (
     <Card className={classes.card}>
@@ -33,7 +33,7 @@ const TodoCard = (props: TodoCardProps) => {
           {todo.item}
         </Typography>
         <div className={classes.spacer} />
-        <Checkbox />
+        <Checkbox onClick={() => toggleCompleted(todo)} />
       </CardContent>
     </Card>
   );
