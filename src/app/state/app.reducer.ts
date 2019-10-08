@@ -32,8 +32,8 @@ export const reducer = (state: TodoState, action: Actions) => {
 
     case 'TOGGLE_COMPLETED':
       if (!payload) return state;
-      payload.completed = !payload.completed;
-      const todos = state.todos.map((todo) => (todo.id === payload.id ? payload : todo));
+      const changedTodo = { ...payload, completed: !payload.completed };
+      const todos = state.todos.map((todo) => (todo.id === payload.id ? changedTodo : todo));
       return {
         ...state,
         todos,
